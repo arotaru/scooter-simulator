@@ -1,40 +1,38 @@
 version: '2'
 services:
-    config-server:
-        container_name: config-server
+    charger-network-config:
+        container_name: charger-network-config
         build:
             context: ./charger-network-config
             dockerfile: Dockerfile
-        image: config-server:latest
+        image: charger-network-config:latest
         expose:
             - 8101
         networks:
             - spring-cloud-network
         volumes:
-            - spring-cloud-config-repo:/var/lib/config-repo
+            - spring-cloud-config-repo:/var/lib/spring-cloud/config-repo
         logging:
             driver: json-file
-    discovery-server:
-        container_name: discovery-server
+    charger-network-discovery:
+        container_name: charger-network-discovery
         build:
             context: ./charger-network-discovery
             dockerfile: Dockerfile
-        image: discovery-server:latest
-        entrypoint: /opt/spring-cloud/bin/config-client-entrypoint.sh
+        image: charger-network-discovery:latest
+        entrypoint: /opt/bin/config-client-entrypoint.sh
         environment:
-            SPRING_APPLICATION_JSON: \
-              '{"spring": {"cloud":  \
-              {"config": {"uri": "http://config-server:8888"}}}}'
+            SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://charger-network-config:8101"}}}}'
         expose:
-            - 8080
+            - 8102
         ports:
-            - 8080:8080
+            - 8102:8102
         networks:
             - spring-cloud-network
         links:
-            - config-server:config-server
+            - charger-network-config:charger-network-config
         depends_on:
-            - config-server
+            - charger-network-config
         logging:
             driver: json-file
 networks:
