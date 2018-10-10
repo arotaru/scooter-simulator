@@ -1,0 +1,13 @@
+This project can be built by cloning the scooter-simulator repo.
+Each of the services (at this time there are 3 integrated in docker-compose: charger-network-config, charger-network-discovery, and charger-network-gateway) must be built with maven.
+
+First, you'll need to install Docker on your machine.
+
+Before running the docker-compose file, a Docker Volume must be created as it is referenced in the compose file. Simply run:
+>docker volume create --name=spring-cloud-config-repo
+
+Next, the docker-compose.yml file is run:
+>docker-compose up --build
+To stop, navigate to the directory that contains the docker-compose.yml file and run:
+>docker-compose down
+
