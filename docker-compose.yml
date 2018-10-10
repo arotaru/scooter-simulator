@@ -1,13 +1,14 @@
 version: '2'
 services:
     charger-network-config:
-        container_name: charger-network-config
         build:
             context: ./charger-network-config
             dockerfile: Dockerfile
         image: charger-network-config:latest
         expose:
             - 8101
+        ports:
+            - "8101:8101"
         networks:
             - spring-cloud-network
         volumes:
@@ -15,24 +16,44 @@ services:
         logging:
             driver: json-file
     charger-network-discovery:
-        container_name: charger-network-discovery
         build:
             context: ./charger-network-discovery
             dockerfile: Dockerfile
         image: charger-network-discovery:latest
-        entrypoint: /opt/bin/config-client-entrypoint.sh
+        entrypoint: /opt/bin/config-discovery-entrypoint.sh
         environment:
             SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://charger-network-config:8101"}}}}'
         expose:
             - 8102
         ports:
-            - 8102:8102
+            - "8102:8102"
         networks:
             - spring-cloud-network
         links:
             - charger-network-config:charger-network-config
         depends_on:
             - charger-network-config
+        logging:
+            driver: json-file
+    charger-network-gateway:
+        build:
+            context: ./charger-network-gateway
+            dockerfile: Dockerfile
+        image: charger-network-gateway:latest
+        entrypoint: /opt/bin/config-gateway-entrypoint.sh
+        environment:
+            SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://charger-network-config:8101"}}}}'
+        expose:
+            - 8100
+        ports:
+            - "8100:8100"
+        networks:
+            - spring-cloud-network
+        links:
+            - charger-network-discovery:charger-network-discovery
+        depends_on:
+            - charger-network-config
+            - charger-network-discovery
         logging:
             driver: json-file
 networks:
