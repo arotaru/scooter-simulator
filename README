@@ -11,3 +11,4 @@ Next, the docker-compose.yml file is run:
 To stop, navigate to the directory that contains the docker-compose.yml file and run:
 >docker-compose down
 
+- The repo at https://github.com/arotaru/config is used by the Config Server for configuration of managed services
