@@ -13,3 +13,24 @@ after_success:
   - docker build -t charger-network-config ./charger-network-config
   - docker tag charger-network-config erikrotaru/charger-network-config
   - docker push erikrotaru/charger-network-config
+
+# CHARGER-NETWORK-DISCOVERY SERVICE
+  - docker build -t charger-network-discovery ./charger-network-discovery
+  - docker tag charger-network-discovery erikrotaru/charger-network-discovery
+  - docker push erikrotaru/charger-network-discovery
+
+# CHARGER-NETWORK-GATEWAY SERVICE
+  - docker build -t charger-network-gateway ./charger-network-gateway
+  - docker tag charger-network-gateway erikrotaru/charger-network-gateway
+  - docker push erikrotaru/charger-network-gateway
+
+# CHARGER-NETWORK-MANAGER SERVICE
+  - docker build -t charger-network-manager ./charger-network-manager
+  - docker tag charger-network-manager erikrotaru/charger-network-manager
+  - docker push erikrotaru/charger-network-manager
+
+# CHARGER-ACCOUNT-MANAGER SERVICE
+  - docker build -t charger-account-manager ./charger-account-manager
+  - docker tag charger-account-manager erikrotaru/charger-account-manager
+  - docker push erikrotaru/charger-account-manager
+
