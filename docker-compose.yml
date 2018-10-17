@@ -5,7 +5,7 @@ services:
         build:
             context: ./charger-network-config
             dockerfile: Dockerfile
-        image: charger-network-config:latest
+        image: charger-network-config
         expose:
             - 8101
         ports:
@@ -21,7 +21,7 @@ services:
         build:
             context: ./charger-network-discovery
             dockerfile: Dockerfile
-        image: charger-network-discovery:latest
+        image: charger-network-discovery
         entrypoint: /opt/bin/config-discovery-entrypoint.sh
         expose:
             - 8761
@@ -40,7 +40,7 @@ services:
         build:
             context: ./charger-network-gateway
             dockerfile: Dockerfile
-        image: charger-network-gateway:latest
+        image: charger-network-gateway
         entrypoint: /opt/bin/config-gateway-entrypoint.sh
         expose:
             - 8100
@@ -60,7 +60,7 @@ services:
         build:
             context: ./charger-network-manager
             dockerfile: Dockerfile
-        image: charger-network-manager:latest
+        image: charger-network-manager
         entrypoint: /opt/bin/charger-network-manager-entrypoint.sh
         expose:
             - 8103
@@ -82,7 +82,7 @@ services:
         build:
             context: ./charger-account-manager
             dockerfile: Dockerfile
-        image: charger-account-manager:latest
+        image: charger-account-manager
         entrypoint: /opt/bin/charger-account-manager-entrypoint.sh
         expose:
             - 8104
