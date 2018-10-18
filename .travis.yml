@@ -34,3 +34,7 @@ after_success:
   - docker tag charger-account-manager erikrotaru/charger-account-manager
   - docker push erikrotaru/charger-account-manager
 
+# CHARGER-CLIENT-SIMULATOR SERVICE
+  - docker build -t charger-client-simulator ./charger-client-simulator
+  - docker tag charger-client-simulator erikrotaru/charger-client-simulator
+  - docker push erikrotaru/charger-client-simulator
