@@ -1,5 +1,5 @@
 This project can be built by cloning the scooter-simulator repo.
-Each of the services (at this time there are 5 integrated in docker-compose: charger-network-config, charger-network-discovery, charger-network-gateway, charger-network-manager, and charger-accout-manager)  must be built with maven.
+Each of the services (at this time there are 6 integrated in docker-compose: charger-network-config, charger-network-discovery, charger-network-gateway, charger-network-manager, charger-account-manager, and chager-client-simulator)  must be built with maven.
 
 First, you'll need to install Docker on your machine.
 
