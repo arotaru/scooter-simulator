@@ -26,13 +26,24 @@ public class ChargerSimulatorApplication {
 		SpringApplication.run(ChargerSimulatorApplication.class, args);
 
 		RestTemplate restTemplate = new RestTemplate();
-		String chargerAccountAPIServerUrl = "http://localhost:8100/";
+		String chargerAccountAPIServerUrl = "http://charger-network-gateway:8100/";
 		String serviceName = "charger-network-manager";
 		String applyForAccountEndpoint = "/apply-for-new-account";
 		
 		String applyForAccountUrl = chargerAccountAPIServerUrl + serviceName + applyForAccountEndpoint;
 		String randomUserUrl = "https://randomuser.me/api/?nat=us";
-
+		
+		try {
+			Thread.sleep(90000);
+			
+			String urlToWakeZuulUp = chargerAccountAPIServerUrl + serviceName + "/test";
+			ResponseEntity<String> testResponse = restTemplate.getForEntity(urlToWakeZuulUp, String.class);
+			
+			Thread.sleep(90000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
 		while (true) {
 			ResponseEntity<String> getRandomUserResponse = restTemplate.getForEntity(randomUserUrl, String.class);
 			JSONObject jsonObj = new JSONObject(getRandomUserResponse.getBody());
