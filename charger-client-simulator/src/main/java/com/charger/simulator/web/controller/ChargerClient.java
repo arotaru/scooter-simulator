@@ -46,7 +46,7 @@ public class ChargerClient {
 	}
 	
 	private NewAccountRequest createNewAccount(NewAccountRequest request) {
-		String newAccountUrl = "http://localhost:8100/charger-network-manager/apply-for-new-account";
+		String newAccountUrl = "http://charger-network-gateway:8100/charger-network-manager/apply-for-new-account";
 //		ResponseEntity<String> response = restTemplate.getForEntity(newAccountUrl + "/1", String.class);
 //		System.out.println(response.toString());
 		
