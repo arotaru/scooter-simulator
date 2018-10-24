@@ -2,13 +2,14 @@ This project can be built by cloning the scooter-simulator repo.
 
 Each of the services must be build with maven.
 
-At this time there are 6 integrated in docker-compose: 
+At this time there are 7 integrated in docker-compose: 
 charger-network-config
 charger-network-discovery
 charger-network-gateway
 charger-network-manager
 charger-account-manager
 chager-client-simulator
+charger-accounts-mongodb (not managed by charger-network-config)
 
 Next, you'll need to install Docker on your machine.
 
@@ -24,4 +25,4 @@ Next, the docker-compose.yml file is run:
 To stop, run:
 >docker-compose down
 
-- The repo at https://github.com/arotaru/config is used by the Network-Config-Server for configuration of managed services
+- The repo at https://github.com/arotaru/config is used by the charger-network-config Server for configuration of managed services
