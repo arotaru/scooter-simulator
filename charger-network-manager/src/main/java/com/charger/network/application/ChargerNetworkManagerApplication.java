@@ -14,7 +14,6 @@ public class ChargerNetworkManagerApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ChargerNetworkManagerApplication.class, args);
-
 	}
 	
 	@Bean
