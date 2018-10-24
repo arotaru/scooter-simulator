@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 services:
     charger-network-config:
         container_name: charger-network-config
@@ -29,8 +29,6 @@ services:
             - "8761:8761"
         networks:
             - spring-cloud-network
-        links:
-            - charger-network-config:charger-network-config
         depends_on:
             - charger-network-config
         logging:
@@ -48,8 +46,6 @@ services:
             - "8100:8100"
         networks:
             - spring-cloud-network
-        links:
-            - charger-network-discovery:charger-network-discovery
         depends_on:
             - charger-network-config
             - charger-network-discovery
@@ -71,9 +67,6 @@ services:
             - charger-client-network
         volumes:
             - spring-cloud-config-repo:/var/lib/spring-cloud/config-repo
-        links:
-            - charger-network-config:charger-network-config
-            - charger-network-discovery:charger-network-discovery
         depends_on:
             - charger-network-gateway
         logging:
@@ -85,17 +78,17 @@ services:
             dockerfile: Dockerfile
         image: charger-account-manager
         entrypoint: /opt/bin/charger-account-manager-entrypoint.sh
+        environment:
+            - MONGODB_URI=mongodb://charger-accounts-mongodb:27017/accounts
         expose:
             - 8104
         ports:
             - "8104:8104"
         networks:
             - spring-cloud-network
+            - charger-accounts-mongodb-network
         volumes:
             - spring-cloud-config-repo:/var/lib/spring-cloud/config-repo
-        links:
-            - charger-network-config:charger-network-config
-            - charger-network-discovery:charger-network-discovery
         depends_on:
             - charger-network-gateway
         logging:
@@ -116,18 +109,33 @@ services:
             - charger-client-network
         volumes:
             - spring-cloud-config-repo:/var/lib/spring-cloud/config-repo
-        links:
-            - charger-network-config:charger-network-config
-            - charger-network-discovery:charger-network-discovery
         depends_on:
             - charger-network-gateway
         logging:
             driver: json-file
+    charger-accounts-mongodb:
+        container_name: charger-accounts-mongodb
+        build:
+            context: ./mongodb
+            dockerfile: Dockerfile
+        image: charger-accounts-mongodb
+        networks:
+            - charger-accounts-mongodb-network
+        volumes: 
+            - charger-accounts:/data/db
+        expose:
+            - 27017
+        ports:
+            - 12345:27017
 networks:
     spring-cloud-network:
         driver: bridge
     charger-client-network:
         driver: bridge
+    charger-accounts-mongodb-network:
+        driver: bridge
 volumes:
     spring-cloud-config-repo:
+        external: true
+    charger-accounts:
         external: true
