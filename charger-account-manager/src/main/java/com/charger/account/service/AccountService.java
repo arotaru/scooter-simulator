@@ -2,8 +2,8 @@ package com.charger.account.service;
 
 import org.springframework.stereotype.Service;
 
-import com.scooter.common.Account;
-import com.scooter.common.ChargerApplicant;
+import com.charger.account.common.Account;
+import com.charger.account.common.ChargerApplicant;
 
 @Service
 public class AccountService {
@@ -18,7 +18,7 @@ public class AccountService {
 	private Account applicantToAccount(ChargerApplicant newApplicant) {
 		Account acct = new Account();
 		
-		acct.setId(1L);
+//		acct.set_id(1L);
 		acct.setRequestedDate("Oct-3-2018");
 		acct.setDateCreated("Oct-3-2018");
 		acct.setAddress(newApplicant.getAddress());
