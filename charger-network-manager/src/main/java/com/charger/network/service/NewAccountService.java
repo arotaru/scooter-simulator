@@ -3,8 +3,7 @@ package com.charger.network.service;
 import org.springframework.stereotype.Service;
 
 import com.charger.network.common.NewAccountRequest;
-import com.scooter.common.Account;
-import com.scooter.common.NewAccountResponse;
+import com.charger.network.common.NewAccountResponse;
 
 @Service
 public class NewAccountService {
@@ -18,7 +17,7 @@ public class NewAccountService {
 		NewAccountResponse response = new NewAccountResponse();
 		
 		response.setNewAccountCreated(true);
-		response.setAccount(new Account());
+		//response.setAccount(new Account());
 		
 		return response;
 	}
