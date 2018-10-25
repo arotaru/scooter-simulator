@@ -127,12 +127,40 @@ services:
             - 27017
         ports:
             - 12345:27017
+    kafka:
+        container_name: kafka
+        build:
+            context: ./kafka
+            dockerfile: Dockerfile
+        image: kafka
+        networks:
+            - kafka
+        expose:
+            - 9092
+        ports:
+            - 9092:9092
+        depends_on:
+            - zookeeper
+    zookeeper:
+        container_name: zookeeper
+        build:
+            context: ./zookeeper
+            dockerfile: Dockerfile
+        image: zookeeper
+        networks:
+            - kafka
+        expose:
+            - 2181
+        ports:
+            - 2181:2181
 networks:
     spring-cloud-network:
         driver: bridge
     charger-client-network:
         driver: bridge
     charger-accounts-mongodb-network:
+        driver: bridge
+    kafka:
         driver: bridge
 volumes:
     spring-cloud-config-repo:
